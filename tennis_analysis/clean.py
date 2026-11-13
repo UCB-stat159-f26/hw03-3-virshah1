@@ -22,3 +22,15 @@ def matches_to_dataframe(matches):
     df = pd.DataFrame(matches)
 
     return df
+def select_match_columns(df):
+    """Select relevant columns from female player match data."""
+    cleaned = df[[0, 4, 11, 16]].copy()
+
+    cleaned.columns = [
+        "match_date",
+        "result",
+        "opponent",
+        "opponent_dob"
+    ]
+
+    return cleaned

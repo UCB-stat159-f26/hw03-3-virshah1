@@ -69,3 +69,21 @@ def select_male_match_columns(df):
     ]
 
     return cleaned
+def calculate_male_ages(df, player_dob):
+    """Calculate player age and age difference for male matches."""
+    df = df.copy()
+
+    df["match_date"] = pd.to_datetime(
+        df["match_date"], format="%Y%m%d", errors="coerce"
+    )
+    df["opponent_age"] = pd.to_numeric(
+        df["opponent_age"], errors="coerce"
+    )
+    player_dob = pd.to_datetime(player_dob)
+
+    df["player_age"] = (
+        (df["match_date"] - player_dob).dt.days / 365.25
+    )
+    df["age_difference"] = df["player_age"] - df["opponent_age"]
+
+    return df

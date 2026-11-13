@@ -59,7 +59,7 @@ def calculate_ages(df, player_dob):
 
 def select_male_match_columns(df):
     """Select relevant columns from male player match data."""
-    cleaned = df[[0, 4, 11, 15]].copy()
+    cleaned = df[[0, 4, 11, 16]].copy()
 
     cleaned.columns = [
         "match_date",

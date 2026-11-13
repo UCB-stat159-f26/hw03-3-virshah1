@@ -87,3 +87,18 @@ def calculate_male_ages(df, player_dob):
     df["age_difference"] = df["player_age"] - df["opponent_age"]
 
     return df
+def clean_player_matches(js, tour, player_dob):
+    """Convert raw match data into a cleaned DataFrame."""
+    matches = parse_matches(js)
+    df = matches_to_dataframe(matches)
+
+    if tour == "atp":
+        df = select_male_match_columns(df)
+        df = calculate_male_ages(df, player_dob)
+    elif tour == "wta":
+        df = select_female_match_columns(df)
+        df = calculate_female_ages(df, player_dob)
+    else:
+        raise ValueError("Tour must be 'atp' or 'wta'.")
+
+    return df

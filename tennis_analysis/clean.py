@@ -96,8 +96,8 @@ def clean_player_matches(js, tour, player_dob):
         df = select_male_match_columns(df)
         df = calculate_male_ages(df, player_dob)
     elif tour == "wta":
-        df = select_female_match_columns(df)
-        df = calculate_female_ages(df, player_dob)
+        df = select_match_columns(df)
+        df = calculate_ages(df, player_dob)
     else:
         raise ValueError("Tour must be 'atp' or 'wta'.")
 

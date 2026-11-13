@@ -4,3 +4,6 @@ def format_player_name(name):
         raise ValueError("Please provide a valid player name.")
 
     return "".join(name.split()).lower()
+
+from .players import get_player_matches
+from .plot import plot_player_matches

@@ -5,18 +5,18 @@ from . import format_player_name
 
 def download_player_data(name, tour="wta"):
     """Download a player's career match data from Tennis Abstract."""
-    player = format_player_name(name)
-
-    if tour.lower() == "wta":
-        player = "".join(word.capitalize() for word in name.split())
-    else:
-        player = "".join(word.capitalize() for word in name.split())
-
+    player = "".join(word.capitalize() for word in name.split())
     url = f"https://www.tennisabstract.com/jsmatches/{player}Career.js"
 
-    response = requests.get(url, timeout=15)
+    try:
+        response = requests.get(url, timeout=15)
+        response.raise_for_status()
+    except requests.RequestException as error:
+        raise ValueError(
+            f"Could not retrieve career data for {name}."
+        ) from error
 
-    if response.status_code != 200:
-        raise ValueError(f"Could not find career data for {name}.")
+    if "morematchmx" not in response.text:
+        raise ValueError(f"Invalid career data for {name}.")
 
     return response.text

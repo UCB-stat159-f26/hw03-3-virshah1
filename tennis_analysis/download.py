@@ -1,11 +1,12 @@
 import requests
 
-from . import format_player_name
-
 
 def download_player_data(name, tour="wta"):
     """Download a player's career match data from Tennis Abstract."""
-    player = "".join(word.capitalize() for word in name.split())
+    player = "".join(
+        word.capitalize() if word.islower() else word
+        for word in name.split()
+    )
     url = f"https://www.tennisabstract.com/jsmatches/{player}Career.js"
 
     try:

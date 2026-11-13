@@ -11,7 +11,7 @@ def test_get_player_matches(mock_dob, mock_download, mock_clean):
     mock_download.return_value = "sample JavaScript"
     mock_clean.return_value = "cleaned data"
 
-    result = get_player_matches("Serena Williams")
+    result = get_player_matches("Serena Williams", tour="wta")
 
     assert result == "cleaned data"
     mock_dob.assert_called_once_with("Serena Williams", "wta")
